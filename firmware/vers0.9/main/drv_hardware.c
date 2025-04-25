@@ -1,0 +1,74 @@
+#include <aplic.h>
+
+static const char *TAG = "drv_HW";
+
+void vInitHw(void)
+{
+  ESP_LOGI(TAG, "Iniciando hardware");
+
+  // Hardware
+  gpio_reset_pin(PIN_RESET);
+  gpio_set_direction(PIN_RESET, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_RESET, TRUE);
+
+  gpio_reset_pin(PIN_LED);
+  gpio_set_direction(PIN_LED, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_LED, FALSE);
+
+  // DDS
+
+  gpio_reset_pin(PIN_DDS_ADJ);
+  gpio_set_direction(PIN_DDS_ADJ, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DDS_ADJ, FALSE);
+
+  gpio_reset_pin(PIN_DDS_WCLK);
+  gpio_set_direction(PIN_DDS_WCLK, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DDS_WCLK, FALSE);
+
+  gpio_reset_pin(PIN_DDS_FQ_UD);
+  gpio_set_direction(PIN_DDS_FQ_UD, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DDS_FQ_UD, FALSE);
+
+  gpio_reset_pin(PIN_DDS_DATA);
+  gpio_set_direction(PIN_DDS_DATA, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DDS_DATA, FALSE);
+
+  // Reset do sistema
+
+  vReset();
+
+  ESP_LOGI(TAG, "Hardware iniciado");
+}
+
+void vReset(void)
+{
+  gpio_set_level(PIN_RESET, TRUE);
+  vTaskDelay(100 / portTICK_PERIOD_MS);
+  gpio_set_level(PIN_RESET, FALSE); 
+}
+
+void vPulso(uint8_t _ui8Pin)
+{
+  gpio_set_level(_ui8Pin, TRUE);
+  gpio_set_level(_ui8Pin, FALSE);
+}
+
+void vShiftOut(gpio_num_t _gDataPin, gpio_num_t _gClockPin, bool _bMsbFirst, uint8_t _ui8_Dado)
+{
+  for (int i = 0; i < 8; i++)
+  {
+    bool _bOutput;
+    if (_bMsbFirst)
+    {
+      _bOutput = _ui8_Dado & 0b10000000;
+      _ui8_Dado = _ui8_Dado << 1;
+    }
+    else
+    {
+        _bOutput = _ui8_Dado & 0b00000001;
+        _ui8_Dado = _ui8_Dado >> 1;
+    }
+    gpio_set_level(_gDataPin, _bOutput);
+    vPulso(_gClockPin);
+  }
+}

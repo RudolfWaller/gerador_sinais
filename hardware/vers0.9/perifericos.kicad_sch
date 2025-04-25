@@ -6370,6 +6370,26 @@
 		)
 		(uuid "3aef0cfb-5e13-4fd3-bba6-4cf30fe38bfb")
 	)
+	(label "PSB"
+		(at 86.36 176.53 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4f488463-fee4-461a-8705-a16387dcd853")
+	)
+	(label "BLK"
+		(at 106.68 181.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "4fb6d4f7-5513-4147-8bfe-db991b242fe5")
+	)
 	(label "E1_B"
 		(at 104.14 45.72 0)
 		(effects
@@ -6400,6 +6420,16 @@
 		)
 		(uuid "6af34c72-c6db-47a1-86a4-e511bd436ad5")
 	)
+	(label "E"
+		(at 106.68 163.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "81874638-db9a-4cd9-9ff3-07b9486e58f1")
+	)
 	(label "R2"
 		(at 40.64 118.11 0)
 		(effects
@@ -6409,6 +6439,16 @@
 			(justify left bottom)
 		)
 		(uuid "88f0b133-d6ae-4988-b59c-264be5073480")
+	)
+	(label "RS"
+		(at 106.68 161.29 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "909dce3b-0cbd-4eba-a54d-9d11b43d0a95")
 	)
 	(label "R1"
 		(at 40.64 115.57 0)
@@ -6430,6 +6470,16 @@
 		)
 		(uuid "98765338-48cc-4843-860b-840d6437e86b")
 	)
+	(label "R{slash}W"
+		(at 86.36 163.83 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a5b56bbf-545d-45f7-9b6c-ffb1adcecf43")
+	)
 	(label "R3"
 		(at 182.88 53.34 0)
 		(effects
@@ -6439,6 +6489,16 @@
 			(justify left bottom)
 		)
 		(uuid "b5736c6b-cbd4-4ee8-ad36-f7fde5574c95")
+	)
+	(label "BLA"
+		(at 86.36 181.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "b9e702bf-1eaf-4c76-a0c9-4d477ae511b8")
 	)
 	(label "R4"
 		(at 40.64 123.19 0)
@@ -6469,6 +6529,16 @@
 			(justify left bottom)
 		)
 		(uuid "d29b1b6a-53b1-450e-9c9c-2cce726c35e7")
+	)
+	(label "RST"
+		(at 86.36 179.07 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "dba7dc93-6f38-4834-bce7-d1f2f78c8546")
 	)
 	(label "R3"
 		(at 40.64 120.65 0)
@@ -9119,7 +9189,6 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "5e05f313-4cf5-4ef6-84d7-a27ac98e6702")
 		(property "Reference" "#PWR13"
 			(at 78.74 163.83 0)
@@ -9131,7 +9200,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 78.74 162.56 0)
+			(at 81.28 160.274 0)
 			(effects
 				(font
 					(size 1.27 1.27)

@@ -3489,16 +3489,6 @@
 	)
 	(wire
 		(pts
-			(xy 139.7 96.52) (xy 156.21 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "417be60b-caa8-4481-ab5f-36b3d54b3b81")
-	)
-	(wire
-		(pts
 			(xy 207.01 105.41) (xy 203.2 105.41)
 		)
 		(stroke
@@ -3839,13 +3829,13 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 86.36) (xy 113.03 86.36)
+			(xy 139.7 96.52) (xy 156.21 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8984d4a9-f1cc-4ff0-802f-e42bbb156bb1")
+		(uuid "9404b4e2-ee10-4d13-a4f2-83ca8e4b43cb")
 	)
 	(wire
 		(pts
@@ -3896,6 +3886,16 @@
 			(type default)
 		)
 		(uuid "97631dcb-ac0d-443c-a181-de99943dd268")
+	)
+	(wire
+		(pts
+			(xy 91.44 86.36) (xy 113.03 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b549406-3bec-4472-b346-fa22a0a61b68")
 	)
 	(wire
 		(pts
@@ -4467,22 +4467,22 @@
 	)
 	(global_label "DDS_DATA"
 		(shape output)
-		(at 156.21 96.52 0)
+		(at 91.44 86.36 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify left)
+			(justify right)
 		)
 		(uuid "5c99e7e0-842f-40ed-bb41-2d07d7334e98")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 168.3271 96.52 0)
+			(at 79.3229 86.36 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -4577,22 +4577,22 @@
 	)
 	(global_label "SHREG_DATAOUT"
 		(shape output)
-		(at 91.44 86.36 180)
+		(at 156.21 96.52 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
 		(uuid "948619e1-6a3f-4cf5-b3f8-398f994a5ac2")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 73.2148 86.36 0)
+			(at 174.4352 96.52 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify right)
+				(justify left)
 				(hide yes)
 			)
 		)

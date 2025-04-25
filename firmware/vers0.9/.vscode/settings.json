@@ -1,0 +1,18 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "idf.espIdfPath": "/home/rudolf/esp/esp-idf",
+    "idf.toolsPath": "/home/rudolf/.espressif",
+    "idf.pythonInstallPath": "/home/rudolf/.pyenv/shims/python",
+    "idf.flashType": "JTAG",
+    "idf.customExtraVars": {
+        "IDF_TARGET": "esp32"
+    },
+    "idf.openOcdConfigs": [
+        "interface/ftdi/esp32_devkitj_v1.cfg",
+        "target/esp32.cfg"
+    ],
+    "idf.port": "/dev/ttyUSB1",
+
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+}
