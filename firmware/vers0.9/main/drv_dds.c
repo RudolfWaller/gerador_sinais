@@ -40,22 +40,26 @@ void vEnviaFreq(uint32_t _ui32Freq, uint8_t _ui8Fase)
   // W4   | Freq–b7        | Freq–b6  | Freq–b5  | Freq–b4  | Freq–b3        | Freq–b2    | Freq–b1   | Freq–b0 (LSB)
 
   uint8_t _ui8Cont;
+  static uint64_t _ui64Temp;
 
-  ESP_LOGI(TAG, "Enviando frequência de %ld Hz e fase de %d", _ui32Freq, _ui8Fase);
+  ESP_LOGI(TAG, "Enviando frequência de %ld Hz e fase de %d°", _ui32Freq, _ui8Fase);
 
   ui32Freq=_ui32Freq;
   ui8Fase =_ui8Fase;
 
-  _ui32Freq=((uint64_t) _ui32Freq)*((uint64_t) 1000L)/((uint64_t) 42L);
+  //_ui32Freq=(uint64_t)((uint64_t)_ui32Freq*(uint64_t)ui32FreqMax)/(uint64_t)2^32;
+  _ui64Temp=_ui32Freq;
+  _ui64Temp<<=32;
+  _ui64Temp/=(uint64_t)ui32FreqMax;
   _ui8Fase=(_ui8Fase << 3) | 0b001;
 
   // now we itterate through the first 32 bits, 8 at a time, streaming to the DataPin.
-  for (_ui8Cont=4; _ui8Cont!=0; _ui8Cont--, _ui32Freq>>=8) 
+  for (_ui8Cont=4; _ui8Cont!=0; _ui8Cont--, _ui64Temp>>=8) 
   {
     //ESP_LOGI(TAG, "W%d=%x", _ui8Cont, (uint8_t) (_ui32Freq & 0xFF));
 
     // stream out bits to DataPin, pulsing clock pin
-    vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, (_ui32Freq & 0xFF));
+    vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, (_ui64Temp & 0xFF));
   }
 
   //ESP_LOGI(TAG, "W0=%x", _ui8Fase & 0xFF);
@@ -106,5 +110,13 @@ uint32_t AD9851::setFreq (uint32_t freq)
 	// convert it back to show what is ACTUALLY set
 	return (uint32_t)((_freq / F_FACTOR) + 0.5);
 }
+
+
+ Defina a frequência do clock base (f_clock) corretamente:
+   - f_clock = (clock_in * 6) se multiplicador ativado
+   - f_clock = clock_in se não
+
+2. Calcule o FTW corretamente:
+   - FTW = (freq_desejada * 2^32) / f_clock
 
 */
