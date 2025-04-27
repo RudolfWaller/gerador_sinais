@@ -1,12 +1,6 @@
 #include <aplic.h>
 
-#define ui32AjustaFreq(Freq) 
-
-#define CAL_VAL (-339UL) // trim this with WWV
 #define MULT_EN  (1 << 0) // enable multiplier bit
-#define REF_CLK  (30000000UL+CAL_VAL) // reference clock 30 MHz plus calibration
-#define F_FACTOR (4294967296.0/(REF_CLK*6.0)) // frequency to binary factor
-#define P_FACTOR (360.0/32.0) // phase to binary factor
 
 //--------------------------------------------------------------
 
@@ -28,7 +22,7 @@ void vInitDds(void)
   ESP_LOGI(TAG, "DDS iniciado");
 }
 
-void vEnviaFreq(uint32_t _ui32Freq, uint8_t _ui8Fase)
+void vEnviaFreq(uint32_t _ui32Freq, uint16_t _i16Fase)
 {
   // -----------------------------------------------------------------------------------------------------------------------------
   // Word | Data[7]        | Data[6]  | Data[5]  | Data[4]  | Data[3]        | Data[2]    | Data[1]   | Data[0]
@@ -42,30 +36,38 @@ void vEnviaFreq(uint32_t _ui32Freq, uint8_t _ui8Fase)
   uint8_t _ui8Cont;
   static uint64_t _ui64Temp;
 
-  ESP_LOGI(TAG, "Enviando frequência de %ld Hz e fase de %d°", _ui32Freq, _ui8Fase);
+  ESP_LOGI(TAG, "Enviando frequência de %ld Hz e fase de %d°", _ui32Freq, _i16Fase);
 
   ui32Freq=_ui32Freq;
-  ui8Fase =_ui8Fase;
+  ui8Fase =_i16Fase;
 
-  //_ui32Freq=(uint64_t)((uint64_t)_ui32Freq*(uint64_t)ui32FreqMax)/(uint64_t)2^32;
   _ui64Temp=_ui32Freq;
   _ui64Temp<<=32;
   _ui64Temp/=(uint64_t)ui32FreqMax;
-  _ui8Fase=(_ui8Fase << 3) | 0b001;
+
+	// constrain phase value to 0...359
+	// note: phase wraps around 359->0
+	while (_i16Fase < 1) {
+		_i16Fase += 360;
+	}
+
+	while (_i16Fase > 359) {
+		_i16Fase -= 360;
+	}
+
+	// derive phase value
+  // _i16Fase = (_i16Fase * 32 / 360) << 3 | 1
+	_i16Fase = ((_i16Fase << (5+3-1)) / (360/2)) | 0b001;
 
   // now we itterate through the first 32 bits, 8 at a time, streaming to the DataPin.
   for (_ui8Cont=4; _ui8Cont!=0; _ui8Cont--, _ui64Temp>>=8) 
   {
-    //ESP_LOGI(TAG, "W%d=%x", _ui8Cont, (uint8_t) (_ui32Freq & 0xFF));
-
     // stream out bits to DataPin, pulsing clock pin
     vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, (_ui64Temp & 0xFF));
   }
 
-  //ESP_LOGI(TAG, "W0=%x", _ui8Fase & 0xFF);
-
   // now send the final 8 bits to complete the 40 bit instruction
-  vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, _ui8Fase & 0xFF);
+  vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, _i16Fase & 0xFF);
 
   // and once all 40 bits have been sent
   // finally we toggle the load bit to say we are done
@@ -75,48 +77,3 @@ void vEnviaFreq(uint32_t _ui32Freq, uint8_t _ui8Fase)
 
 //--------------------------------------------------------------
 
-/*
-int AD9851::setPhase (int phase)
-{
-	// constrain phase value to 0...359
-	// note: phase wraps around 359->0
-	while (phase < 1) {
-		phase += 360;
-	}
-
-	while (phase > 359) {
-		phase -= 360;
-	}
-
-	// derive phase value
-	_phase = (phase / P_FACTOR);
-	_phase <<= 3;
-	_phase |= MULT_EN;
-
-	_update(); // send phase data
-
-	// convert it back to show what is ACTUALLY set
-	phase = (_phase & ~MULT_EN);
-	phase >>= 3;
-	phase *= P_FACTOR;
-	return phase;
-}
-
-uint32_t AD9851::setFreq (uint32_t freq)
-{
-	// derive register value
-	_freq = (uint32_t)((freq * F_FACTOR) + 0.5);
-	_update(); // send it
-	// convert it back to show what is ACTUALLY set
-	return (uint32_t)((_freq / F_FACTOR) + 0.5);
-}
-
-
- Defina a frequência do clock base (f_clock) corretamente:
-   - f_clock = (clock_in * 6) se multiplicador ativado
-   - f_clock = clock_in se não
-
-2. Calcule o FTW corretamente:
-   - FTW = (freq_desejada * 2^32) / f_clock
-
-*/

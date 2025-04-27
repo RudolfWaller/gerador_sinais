@@ -10,6 +10,6 @@
   //---------------------------------------------------------------------------------
 
   void vInitDds(void);
-  void vEnviaFreq(uint32_t _ui32Freq, uint8_t _ui8Fase);
+  void vEnviaFreq(uint32_t _ui32Freq, int16_t _i16Fase);
 
 #endif

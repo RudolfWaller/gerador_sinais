@@ -9,7 +9,7 @@ void app_main(void)
   vInitHw();
   vInitDds();
   ESP_LOGI(TAG, "Sistema iniciado");
-
+  /*
   vEnviaFreq(1, 0);
   vEnviaFreq(10, 0);
   vEnviaFreq(100, 0);
@@ -18,12 +18,12 @@ void app_main(void)
   vEnviaFreq(100000, 0);
   vEnviaFreq(1000000, 0);
   vEnviaFreq(10000000, 0);
-
+  */
   //---------------------------------------------------------
   
   while (1) {
     bool _bLed=FALSE;
-    // ESP_LOGI(TAG, "Led %d", bLed);
+    
     gpio_set_level(PIN_LED, _bLed);
     _bLed=!_bLed;
     
