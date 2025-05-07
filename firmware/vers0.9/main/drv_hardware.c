@@ -2,7 +2,7 @@
 
 static const char *TAG = "drv_HW";
 
-void vInitHw(void)
+void vInicioDriverHardware(void)
 {
   ESP_LOGI(TAG, "Iniciando hardware");
 
@@ -32,6 +32,16 @@ void vInitHw(void)
   gpio_reset_pin(PIN_DDS_DATA);
   gpio_set_direction(PIN_DDS_DATA, GPIO_MODE_OUTPUT);
   gpio_set_level(PIN_DDS_DATA, FALSE);
+
+  // Display
+
+  gpio_reset_pin(PIN_DISPLAY_CLK);
+  gpio_set_direction(PIN_DISPLAY_CLK, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DISPLAY_CLK, FALSE);
+
+  gpio_reset_pin(PIN_DISPLAY_DATA);
+  gpio_set_direction(PIN_DISPLAY_DATA, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DISPLAY_DATA, FALSE);
 
   // Reset do sistema
 

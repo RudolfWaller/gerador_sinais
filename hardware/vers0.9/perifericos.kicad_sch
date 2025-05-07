@@ -3688,6 +3688,12 @@
 		(uuid "8bb9105f-dc95-4257-b255-2b087c4ac4e8")
 	)
 	(junction
+		(at 40.64 110.49)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "90a065f5-9d0d-4a97-be2f-e0effda91741")
+	)
+	(junction
 		(at 218.44 73.66)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3740,12 +3746,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e84209ea-b7e2-4fc0-88ed-4de7a5aaf162")
-	)
-	(junction
-		(at 40.64 110.49)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e99d6d19-0545-4e93-a1bb-d9962c9261c2")
 	)
 	(junction
 		(at 63.5 38.1)
@@ -3931,16 +3931,6 @@
 	)
 	(wire
 		(pts
-			(xy 40.64 93.98) (xy 45.72 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0111561c-43f5-426a-a87b-ad5462168d6e")
-	)
-	(wire
-		(pts
 			(xy 132.08 88.9) (xy 132.08 157.48)
 		)
 		(stroke
@@ -4038,16 +4028,6 @@
 			(type default)
 		)
 		(uuid "0d6cb464-9d50-4e67-ac03-13999e9f17e8")
-	)
-	(wire
-		(pts
-			(xy 45.72 93.98) (xy 45.72 97.79)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0d98faa6-7c41-4e93-95a3-6b5d4e9a728d")
 	)
 	(bus
 		(pts
@@ -5251,6 +5231,16 @@
 	)
 	(wire
 		(pts
+			(xy 40.64 99.06) (xy 40.64 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "97280b67-ae5f-4cc6-9c4b-c13824563a98")
+	)
+	(wire
+		(pts
 			(xy 66.04 123.19) (xy 91.44 123.19)
 		)
 		(stroke
@@ -5438,16 +5428,6 @@
 			(type default)
 		)
 		(uuid "aa67d6ed-58b2-49e1-b8c1-7695c5b561bd")
-	)
-	(wire
-		(pts
-			(xy 40.64 93.98) (xy 40.64 110.49)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aa9140b8-e88a-4802-9e44-e6e67231edf4")
 	)
 	(wire
 		(pts
@@ -6269,7 +6249,7 @@
 		)
 		(uuid "88f0b133-d6ae-4988-b59c-264be5073480")
 	)
-	(label "RS"
+	(label "CS"
 		(at 106.68 161.29 0)
 		(effects
 			(font
@@ -8079,72 +8059,6 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 45.72 97.79 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "36e38759-135b-45d9-800c-2b81ebbe456b")
-		(property "Reference" "#PWR17"
-			(at 45.72 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 45.72 102.87 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 45.72 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 45.72 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 45.72 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ff285a6f-d6c8-42d4-9c50-c5d8e53f4340")
-		)
-		(instances
-			(project "gerador_sinais"
-				(path "/1aec9b5d-f0c7-4911-a832-6f11be903841/5ad42e96-ca87-4402-a9ee-0c3f738ace78"
-					(reference "#PWR17")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 265.43 149.86 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -9204,6 +9118,72 @@
 			(project ""
 				(path "/1aec9b5d-f0c7-4911-a832-6f11be903841/5ad42e96-ca87-4402-a9ee-0c3f738ace78"
 					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:VCC")
+		(at 40.64 99.06 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "824438a9-4e70-402a-abec-a4b9e5045092")
+		(property "Reference" "#PWR17"
+			(at 40.64 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "3,3V"
+			(at 40.64 93.98 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 40.64 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 40.64 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"VCC\""
+			(at 40.64 99.06 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "b1285ac6-998a-414d-8278-e601d8eb3026")
+		)
+		(instances
+			(project "gerador_sinais"
+				(path "/1aec9b5d-f0c7-4911-a832-6f11be903841/5ad42e96-ca87-4402-a9ee-0c3f738ace78"
+					(reference "#PWR17")
 					(unit 1)
 				)
 			)

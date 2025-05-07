@@ -3,11 +3,18 @@
 
 static const char *TAG = "main";
 
+void DoNothing(void)
+{
+  ESP_LOGE(TAG, "DoNothing()");
+}
+
 void app_main(void)
 {
   ESP_LOGI(TAG, "\n\n\n\n\n\nIniciando sistema");
-  vInitHw();
-  vInitDds();
+  vInicioDriverHardware();
+  vInicioDriverDisplay();
+  vInicioBibliotecaDisplay();
+  vInicioDriverDds();
   ESP_LOGI(TAG, "Sistema iniciado");
   /*
   vEnviaFreq(1, 0);
@@ -22,12 +29,11 @@ void app_main(void)
   //---------------------------------------------------------
   
   while (1) {
-    bool _bLed=FALSE;
-    
-    gpio_set_level(PIN_LED, _bLed);
-    _bLed=!_bLed;
-    
-    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    gpio_set_level(PIN_LED, TRUE);
+    vTaskDelay(100 / portTICK_PERIOD_MS);
+
+    gpio_set_level(PIN_LED, FALSE);
+    vTaskDelay(900 / portTICK_PERIOD_MS);
   }
 }
 

@@ -14,5 +14,10 @@
     "idf.port": "/dev/ttyUSB1",
 
     "editor.tabSize": 2,
-    "editor.insertSpaces": true
+    "editor.insertSpaces": true,
+    "files.associations": {
+        "*.py": "python",
+        "_default_types.h": "c",
+        "MASL.C": "cpp"
+    }
 }

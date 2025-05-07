@@ -5,12 +5,12 @@
 //--------------------------------------------------------------
 
 static uint32_t ui32Freq;
-static uint8_t  ui8Fase;
+static int8_t   i8Fase;
 static const char *TAG = "drv_DDS";
 
 //--------------------------------------------------------------
 
-void vInitDds(void)
+void vInicioDriverDds(void)
 {
   ESP_LOGI(TAG, "Iniciando DDS"); 
 
@@ -22,7 +22,7 @@ void vInitDds(void)
   ESP_LOGI(TAG, "DDS iniciado");
 }
 
-void vEnviaFreq(uint32_t _ui32Freq, uint16_t _i16Fase)
+void vEnviaFreq(uint32_t _ui32Freq, int16_t _i16Fase)
 {
   // -----------------------------------------------------------------------------------------------------------------------------
   // Word | Data[7]        | Data[6]  | Data[5]  | Data[4]  | Data[3]        | Data[2]    | Data[1]   | Data[0]
@@ -39,7 +39,6 @@ void vEnviaFreq(uint32_t _ui32Freq, uint16_t _i16Fase)
   ESP_LOGI(TAG, "Enviando frequência de %ld Hz e fase de %d°", _ui32Freq, _i16Fase);
 
   ui32Freq=_ui32Freq;
-  ui8Fase =_i16Fase;
 
   _ui64Temp=_ui32Freq;
   _ui64Temp<<=32;
@@ -54,6 +53,7 @@ void vEnviaFreq(uint32_t _ui32Freq, uint16_t _i16Fase)
 	while (_i16Fase > 359) {
 		_i16Fase -= 360;
 	}
+  i8Fase =_i16Fase;
 
 	// derive phase value
   // _i16Fase = (_i16Fase * 32 / 360) << 3 | 1

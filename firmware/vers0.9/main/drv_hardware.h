@@ -26,7 +26,7 @@
 
   //---------------------------------------------------------------------------------
 
-  void vInitHw(void);
+  void vInicioDriverHardware(void);
   void vReset(void);
   void vPulso(uint8_t _ui8Pin);
   void vShiftOut(gpio_num_t _gDataPin, gpio_num_t _gClockPin, bool _bMsbFirst, uint8_t _ui8_Dado);

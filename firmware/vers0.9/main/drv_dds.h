@@ -1,4 +1,5 @@
 #ifndef __DRV_DDS_H
+  #define __DRV_DDS_H
 
   //---------------------------------------------------------------------------------
 
@@ -9,7 +10,7 @@
   #endif
   //---------------------------------------------------------------------------------
 
-  void vInitDds(void);
+  void vInicioDriverDds(void);
   void vEnviaFreq(uint32_t _ui32Freq, int16_t _i16Fase);
 
 #endif
