@@ -12,6 +12,7 @@
 
   #define PIN_DISPLAY_CLK   18
   #define PIN_DISPLAY_DATA  23
+  #define PIN_DISPLAY_CS    32
 
   #define PIN_DDS_ADJ       25
   #define PIN_DDS_FQ_UD     17

@@ -43,6 +43,10 @@ void vInicioDriverHardware(void)
   gpio_set_direction(PIN_DISPLAY_DATA, GPIO_MODE_OUTPUT);
   gpio_set_level(PIN_DISPLAY_DATA, FALSE);
 
+  gpio_reset_pin(PIN_DISPLAY_CS);
+  gpio_set_direction(PIN_DISPLAY_CS, GPIO_MODE_OUTPUT);
+  gpio_set_level(PIN_DISPLAY_CS, FALSE);
+
   // Reset do sistema
 
   vReset();
@@ -55,19 +59,24 @@ void vReset(void)
   gpio_set_level(PIN_RESET, TRUE);
   vTaskDelay(100 / portTICK_PERIOD_MS);
   gpio_set_level(PIN_RESET, FALSE); 
+  vTaskDelay(100 / portTICK_PERIOD_MS);
 }
 
 void vPulso(uint8_t _ui8Pin)
 {
   gpio_set_level(_ui8Pin, TRUE);
+  __asm__ __volatile__("nop");
   gpio_set_level(_ui8Pin, FALSE);
 }
 
 void vShiftOut(gpio_num_t _gDataPin, gpio_num_t _gClockPin, bool _bMsbFirst, uint8_t _ui8_Dado)
 {
-  for (int i = 0; i < 8; i++)
+  int _iCont;
+
+  for (_iCont = 8; _iCont != 0; _iCont--)
   {
     bool _bOutput;
+
     if (_bMsbFirst)
     {
       _bOutput = _ui8_Dado & 0b10000000;
