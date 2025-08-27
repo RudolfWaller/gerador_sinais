@@ -43,10 +43,6 @@ void vInicioDriverHardware(void)
   gpio_set_direction(PIN_DISPLAY_DATA, GPIO_MODE_OUTPUT);
   gpio_set_level(PIN_DISPLAY_DATA, FALSE);
 
-  gpio_reset_pin(PIN_DISPLAY_CS);
-  gpio_set_direction(PIN_DISPLAY_CS, GPIO_MODE_OUTPUT);
-  gpio_set_level(PIN_DISPLAY_CS, FALSE);
-
   // Reset do sistema
 
   vReset();

@@ -17,6 +17,9 @@ doxygen/
 # Log files
 *.log
 
+# KiCAD
+*.zip
+
 # Maven
 target/
 dist/

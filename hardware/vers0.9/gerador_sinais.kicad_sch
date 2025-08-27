@@ -4059,16 +4059,6 @@
 	)
 	(wire
 		(pts
-			(xy 91.44 83.82) (xy 113.03 83.82)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c47633b5-f80b-4695-bed1-f85cb1b10ca0")
-	)
-	(wire
-		(pts
 			(xy 53.34 36.83) (xy 53.34 43.18)
 		)
 		(stroke
@@ -4785,28 +4775,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "DISPLAY_CS"
-		(shape output)
-		(at 91.44 83.82 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "d11d4ab5-dabc-4ce1-aaca-0d6700c16417")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 77.4481 83.82 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
