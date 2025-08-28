@@ -63,6 +63,7 @@ void vPulso(uint8_t _ui8Pin)
   gpio_set_level(_ui8Pin, TRUE);
   __asm__ __volatile__("nop");
   gpio_set_level(_ui8Pin, FALSE);
+  __asm__ __volatile__("nop");
 }
 
 void vShiftOut(gpio_num_t _gDataPin, gpio_num_t _gClockPin, bool _bMsbFirst, uint8_t _ui8_Dado)

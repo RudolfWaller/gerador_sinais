@@ -19,6 +19,17 @@ void vInicioDriverDds(void)
 
   vEnviaFreq(0, 0);
 
+  /*
+  vEnviaFreq(1, 0);
+  vEnviaFreq(10, 0);
+  vEnviaFreq(100, 0);
+  vEnviaFreq(1000, 0);
+  vEnviaFreq(10000, 0);
+  vEnviaFreq(100000, 0);
+  vEnviaFreq(1000000, 0);
+  vEnviaFreq(10000000, 0);
+  */
+   
   ESP_LOGI(TAG, "DDS iniciado");
 }
 

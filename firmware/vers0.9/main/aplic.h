@@ -14,17 +14,21 @@
 
   #include <stdio.h>
   #include <string.h>
+  #include <unistd.h>
+  #include <stdarg.h> 
   #include "freertos/FreeRTOS.h"
   #include "freertos/task.h"
+  #include "freertos/semphr.h" 
   #include "driver/gpio.h"
   #include "esp_log.h"
   #include "sdkconfig.h"
   #include "esp_rom_sys.h"
+  #include "driver/spi_master.h"
 
   //---------------------------------------------------------------------------------
 
   typedef uint8_t uchar;
-  typedef uint16_t uint;
+  //typedef uint16_t uint;
   typedef uint32_t ulong;
 
   //---------------------------------------------------------------------------------
@@ -34,6 +38,13 @@
   #include "lib_display.h"
   #include "drv_dds.h"
 
+  #include "app_hardware.h"
+  #include "app_display.h"
+
+  //---------------------------------------------------------------------------------
+
+  var int xxx;
+  
   //---------------------------------------------------------------------------------
 
   void DoNothing(void);

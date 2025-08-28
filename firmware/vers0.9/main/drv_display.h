@@ -8,13 +8,21 @@
   // Variáveis
 
   // var int gdriver, gmode, errorcode;
+  typedef enum{
+    eINIT=0x55,
+    eGRAPH=0x5A,
+    eTEXT=0xA5
+  } tModoDisplay;
 
   //****************************************************************
   // Rotinas
 
   void vInicioDriverDisplay(void);
-  void vComandoDisplay(uchar _ucCom);
-  void vDadoDisplay(uchar _ucDado);
-  void vGotoXY(uchar _ucCol, uchar _ucLin);
+  void __vComandoDisplay(uchar _ucCom);
+  void __vDadoDisplay(uchar _ucDado);
+  void __vGotoXY(uchar _ucCol, uchar _ucLin);
+  void __vPosCursor(uchar *_pucCol, uchar *_pucLin);
+  void __vStringDisplay(char *_pcString);
+  void __vInicioDisplay(tModoDisplay _eModoDisplay);
 
 #endif

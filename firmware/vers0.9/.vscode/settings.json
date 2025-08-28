@@ -18,6 +18,8 @@
     "files.associations": {
         "*.py": "python",
         "_default_types.h": "c",
-        "MASL.C": "cpp"
+        "MASL.C": "cpp",
+        "cstdint": "c",
+        "format": "c"
     }
 }
