@@ -13,7 +13,7 @@
   void vInicioAppDisplay(void);
 
   void vDadoDisplay(uchar _ucDado);
-  void vGotoXY(uchar _ucCol, uchar _ucLin);
+  void vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin);
   void vStringDisplay(char *_pcString);
   void vPrintf(const char *fmt, ...);
   void vInicioDisplay(tModoDisplay _eModoDisplay);

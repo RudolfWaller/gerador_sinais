@@ -40,7 +40,7 @@ void vSalvaInfoDisplay(void)
   TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
   Display_t *pxState = (Display_t *)pvTaskGetThreadLocalStoragePointer(xTaskHandle, 0);
 
-  __vPosCursor(&pxState->ui8Coluna, &pxState->ui8linha);
+  __vGetCursor(&pxState->ui8Coluna, &pxState->ui8linha);
   xSemaphoreGive(sSemDisplay);
 }
 
@@ -55,10 +55,11 @@ void vDadoDisplay(uchar _ucDado)
 
 //****************************************************************************
 
-void vGotoXY(uchar _ucCol, uchar _ucLin)
+void vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin)
 {
-  vRecuperaInfoDisplay();
-  __vGotoXY(_ucCol, _ucLin);
+  vRecuperaInfoDisplay();  
+  __vGotoXY(_ui8Col, _ui8Lin);
+  //__vSetCursor(_ui8Col, _ui8Lin);
   vSalvaInfoDisplay();
 }
 
@@ -234,13 +235,13 @@ static void vTaskTesteDisplay(void *pvParameters)
   _ui8Indice=*(uint8_t *) pvParameters;
   _ui8Cont=0;
   while(1){
-    vGotoXY(3*(_ui8Indice%5), _ui8Indice/4);
-    //vPrintf("%4d",_ui8Cont);
-    vPrintf("%3d",_ui8Indice);
+    vGotoXY(3*(_ui8Indice%5), _ui8Indice/5);
+    vPrintf("%3d",_ui8Cont);
+    //vPrintf("%3d",_ui8Indice);
     if(++_ui8Cont>=100)
       _ui8Cont=0;
-while(1)
-    vTaskDelay(pdMS_TO_TICKS(500+10*_ui8Indice));
+
+    vTaskDelay(pdMS_TO_TICKS(500+11*_ui8Indice));
   }
 }
 

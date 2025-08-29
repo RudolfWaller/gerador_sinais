@@ -81,43 +81,54 @@ static void vComandoDisplay(uchar _ucCom)
 
 //****************************************************************************
 
-void __vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin) {
-  switch(eModoDisplay){
-    case eGRAPH:
-      static const uint8_t base[4] = {0x80, 0x90, 0x88, 0x98};
+void __vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin) 
+{
+  if(ui8Col!=_ui8Col || ui8Lin!=_ui8Lin){
+    switch(eModoDisplay){
+      case eGRAPH:
+        static const uint8_t base[4] = {0x80, 0x90, 0x88, 0x98};
 
-      // Y: 0..63 (linhas), X: 0..7 (cada X cobre 16 colunas)
-      vComandoDisplay(0x80 | (_ui8Lin & 0x3F));   // Set Y address
-      vComandoDisplay(0x80 | (_ui8Col & 0x0F));   // Set X address (0..7)
-      break;
+        // Y: 0..63 (linhas), X: 0..7 (cada X cobre 16 colunas)
+        vComandoDisplay(0x80 | (_ui8Lin & 0x3F));   // Set Y address
+        vComandoDisplay(0x80 | (_ui8Col & 0x0F));   // Set X address (0..7)
+        break;
 
-    case eTEXT:
-      if (_ui8Lin >= 4) 
-        _ui8Lin = 0;
-      if (_ui8Col >= 16) 
-        _ui8Col = 0;
-        
-      ui8Col=_ui8Col;
-      ui8Lin=_ui8Lin;
+      case eTEXT:
+        if (_ui8Lin >= 4) 
+          _ui8Lin = 0;
+        if (_ui8Col >= 16) 
+          _ui8Col = 0;
+          
+        ui8Col=_ui8Col;
+        ui8Lin=_ui8Lin;
 
-      vComandoDisplay(base[_ui8Lin] + _ui8Col/2);
-      if(_ui8Col & 1){
-        ui8Col--;
-        __vDadoDisplay((uchar)vui8Display[ui8Lin][ui8Col]);
-      }
-      break;
+        vComandoDisplay(base[_ui8Lin] + _ui8Col/2);
+        if(_ui8Col & 1){
+          ui8Col--;
+          __vDadoDisplay((uchar)vui8Display[ui8Lin][ui8Col]);
+        }
+        break;
 
-    default:
-      ESP_LOGE(TAG, "Modo Display inválido em vGotoXY()"); 
+      default:
+        ESP_LOGE(TAG, "Modo Display inválido em vGotoXY()"); 
+    }
   }
 }
 
 //****************************************************************************
 
-void __vPosCursor(uchar *_pucCol, uchar *_pucLin)
+void __vGetCursor(uint8_t *_pui8Col, uint8_t *_pui8Lin)
 {
-  *_pucCol=ui8Col;
-  *_pucLin=ui8Lin;
+  *_pui8Col=ui8Col;
+  *_pui8Lin=ui8Lin;
+}
+
+//****************************************************************************
+
+void __vSetCursor(uint8_t _ui8Col, uint8_t _ui8Lin)
+{
+  ui8Col=_ui8Col;
+  ui8Lin=_ui8Lin;
 }
 
 //****************************************************************************
