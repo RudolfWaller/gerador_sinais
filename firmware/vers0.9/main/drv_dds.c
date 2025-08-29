@@ -74,11 +74,12 @@ void vEnviaFreq(uint32_t _ui32Freq, int16_t _i16Fase)
   for (_ui8Cont=4; _ui8Cont!=0; _ui8Cont--, _ui64Temp>>=8) 
   {
     // stream out bits to DataPin, pulsing clock pin
-    vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, (_ui64Temp & 0xFF));
+    ui8ShiftReg(PIN_DDS_DATA, 0, PIN_DDS_WCLK, FALSE, (_ui64Temp & 0xFF));
+
   }
 
   // now send the final 8 bits to complete the 40 bit instruction
-  vShiftOut(PIN_DDS_DATA, PIN_DDS_WCLK, FALSE, _i16Fase & 0xFF);
+  ui8ShiftReg(PIN_DDS_DATA, 0, PIN_DDS_WCLK, FALSE, _i16Fase & 0xFF);
 
   // and once all 40 bits have been sent
   // finally we toggle the load bit to say we are done

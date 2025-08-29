@@ -40,6 +40,7 @@
 
   #include "app_hardware.h"
   #include "app_display.h"
+  #include "app_teclado.h"
 
   //---------------------------------------------------------------------------------
 

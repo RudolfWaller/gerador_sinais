@@ -5,11 +5,11 @@
   #define PIN_LED            2 
   #define PIN_ADC           27
 
-  #define PIN_SHREG_HOLD    22
+  #define PIN_SHREG_CLK     19
   #define PIN_SHREG_DATAOUT  4
   #define PIN_SHREG_DATAIN  21
-  #define PIN_SHREG_CLK     19
-
+  #define PIN_SHREG_HOLD    22
+  
   #define PIN_DISPLAY_CLK   18
   #define PIN_DISPLAY_DATA  23
 
@@ -29,6 +29,7 @@
   void vInicioDriverHardware(void);
   void vReset(void);
   void vPulso(uint8_t _ui8Pin);
-  void vShiftOut(gpio_num_t _gDataPin, gpio_num_t _gClockPin, bool _bMsbFirst, uint8_t _ui8_Dado);
+  uint8_t ui8Teclado(uint8_t _ui8Saida);
+  uint8_t ui8ShiftReg(gpio_num_t _gDataOutPin, gpio_num_t _gDataInPin, gpio_num_t _gClockPin, bool _bMsbFirst, uint8_t _ui8_Dado);
 
 #endif

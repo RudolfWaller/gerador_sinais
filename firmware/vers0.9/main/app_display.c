@@ -264,17 +264,19 @@ void vInicioAppDisplay(void)
   sSemDisplay = xSemaphoreCreateMutex();
     
   if (sSemDisplay == NULL) {  
+    __vInicioDisplay(eTEXT);
+    __vStringDisplay("Erro na criação do Mutex de índice de tarefas");
     ESP_LOGE(TAG, "Erro na criação do Mutex de índice de tarefas");
-    vInicioDisplay(eTEXT);
-    vStringDisplay("Erro na criação do Mutex de índice de tarefas");
     while(1)
       vTaskDelay(pdMS_TO_TICKS(1000));
   }
-
+  
+  /*
   uint8_t _ui8Cont;
 
   for(_ui8Cont=0; _ui8Cont<20; _ui8Cont++)
     vCriaTarefas(_ui8Cont);
+  */
 
   ESP_LOGI(TAG, "display APP iniciado");
 }

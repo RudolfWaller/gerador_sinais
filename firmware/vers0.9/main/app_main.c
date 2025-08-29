@@ -19,12 +19,15 @@ void app_main(void)
   ESP_LOGI(TAG, "\n\n\n\n\n\nIniciando sistema");
   vInicioDriverHardware();
   vInicioDriverDisplay();
-  // vInicioBibliotecaDisplay();
   vInicioDriverDds();
+
+  // vInicioBibliotecaDisplay();
+  
   vInicioAppHardware();
   vInicioAppDisplay();
+  vInicioAppTeclado();
   
-  ESP_LOGI(TAG, "\nSistema iniciado\n");
+  ESP_LOGI(TAG, "\n\nSistema iniciado\n");
 
   //---------------------------------------------------------
 
