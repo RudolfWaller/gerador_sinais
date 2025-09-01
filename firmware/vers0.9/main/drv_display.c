@@ -4,6 +4,7 @@
 
 #define TEMPO_ENTRE_BYTES   80
 #define TEMPO_APOS_COMANDO 100
+#define PRINTF_BUFFER_SIZE 100
 
 //****************************************************************************
 
@@ -168,6 +169,28 @@ void __vStringDisplay(char *_pcString)
   while(*_pcString)
     __vDadoDisplay(*_pcString++);
 }
+
+//****************************************************************************
+
+void __vPrintf(const char *fmt, ...) 
+{
+  char buffer[PRINTF_BUFFER_SIZE];
+  va_list args;
+  
+  // Inicia a lista de argumentos variáveis.
+  va_start(args, fmt);
+  
+  // Formata a string e a armazena no buffer com segurança.
+  // vsnprintf previne overflow do buffer.
+  vsnprintf(buffer, sizeof(buffer), fmt, args);
+  
+  // Finaliza a lista de argumentos.
+  va_end(args);
+  
+  // Envia a string formatada para a função do seu driver.
+  __vStringDisplay(buffer);
+}
+
 
 //****************************************************************************
 

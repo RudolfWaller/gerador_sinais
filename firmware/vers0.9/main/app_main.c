@@ -26,6 +26,7 @@ void app_main(void)
   vInicioAppHardware();
   vInicioAppDisplay();
   vInicioAppTeclado();
+  vInicioAppGerador();
   
   ESP_LOGI(TAG, "\n\nSistema iniciado\n");
 

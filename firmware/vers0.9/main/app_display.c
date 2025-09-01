@@ -24,7 +24,7 @@ void vRecuperaInfoDisplay(void)
 
   if(pxState==NULL){
     pxState = (Display_t *)malloc(sizeof(Display_t));
-    pxState->ui8linha = 0;
+    pxState->ui8linha  = 0;
     pxState->ui8Coluna = 0;
     vTaskSetThreadLocalStoragePointer(xTaskHandle, 0, pxState);
   }
@@ -59,7 +59,6 @@ void vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin)
 {
   vRecuperaInfoDisplay();  
   __vGotoXY(_ui8Col, _ui8Lin);
-  //__vSetCursor(_ui8Col, _ui8Lin);
   vSalvaInfoDisplay();
 }
 
@@ -82,19 +81,44 @@ void vPrintf(const char *fmt, ...)
   // Inicia a lista de argumentos variáveis.
   va_start(args, fmt);
   
-  // Formata a string e a armazena no buffer com segurança.
+  // Formata a string e a armazena no buffer
   // vsnprintf previne overflow do buffer.
   vsnprintf(buffer, sizeof(buffer), fmt, args);
   
   // Finaliza a lista de argumentos.
   va_end(args);
   
-  // Envia a string formatada para a função do seu driver.
+  // Envia a string formatada para a função do driver.
   vStringDisplay(buffer);
 }
 
 //****************************************************************************
 
+void vPosPrintf(uint8_t _ui8Col, uint8_t _ui8Lin, const char *fmt, ...)
+{
+  char buffer[PRINTF_BUFFER_SIZE];
+  va_list args;
+  
+  // Inicia a lista de argumentos variáveis.
+  va_start(args, fmt);
+  
+  // Formata a string e a armazena no buffer
+  // vsnprintf previne overflow do buffer.
+  vsnprintf(buffer, sizeof(buffer), fmt, args);
+  
+  // Finaliza a lista de argumentos.
+  va_end(args);
+  
+  vRecuperaInfoDisplay();    
+  __vGotoXY(_ui8Col, _ui8Lin);
+
+  // Envia a string formatada para a função do driver.
+  __vStringDisplay(buffer);
+
+  vSalvaInfoDisplay();
+}
+
+//****************************************************************************
 
 void vInicioDisplay(tModoDisplay _eModoDisplay)
 {
@@ -102,7 +126,7 @@ void vInicioDisplay(tModoDisplay _eModoDisplay)
 }
 
 //****************************************************************************
-
+/*
 static void st7920_fill_pattern(uint8_t lo, uint8_t hi) 
 {
   for (uint8_t y = 0; y < 64; y++) {
@@ -119,9 +143,9 @@ static void st7920_fill_pattern(uint8_t lo, uint8_t hi)
     }
   }
 }
-
+*/
 //****************************************************************************
-
+/*
 static void vTeste0(void)
 {
   vGotoXY(0, 0);
@@ -134,9 +158,9 @@ static void vTeste0(void)
   while(1)
     vTaskDelay(pdMS_TO_TICKS(2000)); // Clear    
 }
-
+*/
 //****************************************************************************
-
+/*
 static void vTeste1(void)
 {
   uint8_t _ui8Lin, _ui8Col;
@@ -158,9 +182,9 @@ static void vTeste1(void)
     vTaskDelay(pdMS_TO_TICKS(2000)); // Clear    
   }
 }
-
+*/
 //****************************************************************************
-
+/*
 static void vTeste2(void)
 {
   uint8_t _ui8Lin, _ui8Col;
@@ -177,9 +201,9 @@ static void vTeste2(void)
     vTaskDelay(pdMS_TO_TICKS(2000)); // Clear    
   }
 }
-
+*/
 //****************************************************************************
-
+/*
 static void vTeste3(void)
 {
   uint8_t _ui8Cont;
@@ -193,9 +217,9 @@ static void vTeste3(void)
     vTaskDelay(pdMS_TO_TICKS(20)); // Clear    
   }
 }
-
+*/
 //****************************************************************************
-
+/*
 static void vTeste4(void)
 {
   uint8_t _ui8L, _ui8C;
@@ -218,14 +242,14 @@ static void vTeste4(void)
     vTaskDelay(pdMS_TO_TICKS(500));
   }
 }
-
+*/
 //****************************************************************************
-
+/*
 static void vTaskDisplay(void *pvParameters) 
 {  
   vTeste3();
 }
-
+*/
 //****************************************************************************
 
 static void vTaskTesteDisplay(void *pvParameters) 
@@ -235,8 +259,12 @@ static void vTaskTesteDisplay(void *pvParameters)
   _ui8Indice=*(uint8_t *) pvParameters;
   _ui8Cont=0;
   while(1){
-    vGotoXY(3*(_ui8Indice%5), _ui8Indice/5);
-    vPrintf("%3d",_ui8Cont);
+    if(_ui8Indice & 1){
+      vGotoXY(3*(_ui8Indice%5), _ui8Indice/5);
+      vPrintf("%3d",_ui8Cont);
+    }
+    else
+      vPosPrintf(3*(_ui8Indice%5), _ui8Indice/5, "%3d",_ui8Cont);
     //vPrintf("%3d",_ui8Indice);
     if(++_ui8Cont>=100)
       _ui8Cont=0;

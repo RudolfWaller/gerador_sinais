@@ -1,13 +1,11 @@
-#ifndef __DRV_TECLADO_H
-  #define __DRV_TECLADO_H
+#ifndef __DRV_GERADOR_H
+  #define __DRV_GERADOR_H
 
 
   //---------------------------------------------------------------------------------
 
-  var QueueHandle_t sTeclas;
-  
   //---------------------------------------------------------------------------------
 
-  void vInicioAppTeclado(void);
+  void vInicioAppGerador(void);
 
 #endif

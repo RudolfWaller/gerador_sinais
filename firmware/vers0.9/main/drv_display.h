@@ -24,6 +24,7 @@
   void __vGetCursor(uint8_t *_pui8Col, uint8_t *_pui8Lin);
   void __vSetCursor(uint8_t _ui8Col, uint8_t _ui8Lin);
   void __vStringDisplay(char *_pcString);
+  void __vPrintf(const char *fmt, ...);
   void __vInicioDisplay(tModoDisplay _eModoDisplay);
 
 #endif

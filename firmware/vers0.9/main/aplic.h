@@ -19,6 +19,7 @@
   #include "freertos/FreeRTOS.h"
   #include "freertos/task.h"
   #include "freertos/semphr.h" 
+  #include "freertos/queue.h" 
   #include "driver/gpio.h"
   #include "esp_log.h"
   #include "sdkconfig.h"
@@ -41,6 +42,7 @@
   #include "app_hardware.h"
   #include "app_display.h"
   #include "app_teclado.h"
+  #include "app_gerador.h"
 
   //---------------------------------------------------------------------------------
 
