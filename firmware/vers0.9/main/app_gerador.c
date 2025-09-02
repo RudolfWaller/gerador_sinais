@@ -10,7 +10,7 @@ static const struct{
             {"kHz", 1000},
             {"MHz", 1000000}};
 static char     vcFreqAtual[10];
-static char     vcFreq[6+1];
+static char     vcFreq[10+1];
 static uint8_t  ui8Pot, ui8PotAtual;
 
 //****************************************************************************
@@ -34,7 +34,11 @@ static void vMostraFreq(void)
 static void vTaskGerador(void *pvParameters) 
 {
   char _vcTecla[2];
+  char *_pcStr;
+
   uint8_t _ui8Tam;
+  uint32_t _ui32Freq;
+  float _fFreq;
 
   strcpy(vcFreq, "0");
   strcpy(vcFreqAtual, "0");
@@ -100,6 +104,19 @@ static void vTaskGerador(void *pvParameters)
           strcpy(vcFreqAtual, vcFreq);
           ui8PotAtual=ui8Pot;
 
+          for(_pcStr=vcFreq; *_pcStr!=0; _pcStr++)
+            if(*_pcStr==',')
+              *_pcStr='.';
+          _fFreq=atof(vcFreq)*vsPot[ui8PotAtual].ui32Mult;
+          snprintf(vcFreq, sizeof(vcFreq), "%.2f", _fFreq);
+          for(_pcStr=vcFreq; *_pcStr!=0; _pcStr++)
+            if(*_pcStr=='.'){
+              *_pcStr=0;
+              break;
+            }
+          _ui32Freq=atol(vcFreq);
+          vEnviaFreq(_ui32Freq, 0);
+
           strcpy(vcFreq, "0");
           ui8Pot=0;
 
@@ -118,7 +135,7 @@ void vInicioAppGerador(void)
 {
   ESP_LOGI(TAG, "Iniciando teclado APP");
 
-  xTaskCreate(vTaskGerador, "Task_Gerador", 2048, NULL, 1, NULL);
+  xTaskCreate(vTaskGerador, "Task_Gerador", 4096, NULL, 1, NULL);
   
   ESP_LOGI(TAG, "teclado APP iniciado");
 }

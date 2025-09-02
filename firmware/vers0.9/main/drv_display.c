@@ -75,7 +75,7 @@ static void vComandoDisplay(uchar _ucCom)
   vEscreveDisplay(_ucCom, TRUE);
 
   if(_ucCom == 0x01 || _ucCom == 0x03)
-    vTaskDelay(1+pdMS_TO_TICKS(2)); // Clear
+    esp_rom_delay_us(2000);
   else
     esp_rom_delay_us(TEMPO_APOS_COMANDO);
 }
