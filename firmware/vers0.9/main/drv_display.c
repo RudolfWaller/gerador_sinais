@@ -134,6 +134,15 @@ void __vSetCursor(uint8_t _ui8Col, uint8_t _ui8Lin)
 
 //****************************************************************************
 
+void __vLimpaDisplay(void)
+{
+  vComandoDisplay(0x01); // Limpa display
+  memset(vui8Display, ' ', sizeof(vui8Display));
+  __vGotoXY(0,0);
+}
+
+//****************************************************************************
+
 void __vDadoDisplay(uchar _ucDado)
 {
   uint8_t *_pui8P;
@@ -207,8 +216,7 @@ void __vInicioDisplay(tModoDisplay _eModoDisplay)
         vComandoDisplay(0x30); // (mandar 2x ajuda pós-reset)
         vComandoDisplay(0x0C); // Display ON, cursor OFF
         vComandoDisplay(0x06); // Entry mode (incremento)
-        vComandoDisplay(0x01); 
-        __vGotoXY(0,0);
+        __vLimpaDisplay(); 
 
         if(eModoDisplay==eGRAPH){
           vComandoDisplay(0x30);  //esp_rom_delay_us(TEMPO_APOS_COMANDO); // basic

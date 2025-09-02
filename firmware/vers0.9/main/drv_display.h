@@ -20,6 +20,7 @@
   void vInicioDriverDisplay(void);
   void __vComandoDisplay(uchar _ucCom);
   void __vDadoDisplay(uchar _ucDado);
+  void __vLimpaDisplay(void);
   void __vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin);
   void __vGetCursor(uint8_t *_pui8Col, uint8_t *_pui8Lin);
   void __vSetCursor(uint8_t _ui8Col, uint8_t _ui8Lin);

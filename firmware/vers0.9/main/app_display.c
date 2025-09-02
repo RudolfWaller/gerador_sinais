@@ -46,6 +46,15 @@ void vSalvaInfoDisplay(void)
 
 //****************************************************************************
 
+void vLimpaDisplay()
+{
+  vRecuperaInfoDisplay();
+  __vLimpaDisplay();
+  vSalvaInfoDisplay();
+}
+
+//****************************************************************************
+
 void vDadoDisplay(uchar _ucDado)
 {
   vRecuperaInfoDisplay();
