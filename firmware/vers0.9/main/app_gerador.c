@@ -10,7 +10,7 @@ static const struct{
             {"kHz", 1000},
             {"MHz", 1000000}};
 static char     vcFreqAtual[10];
-static char     vcFreq[10+1];
+static char     vcFreq[5+1];
 static uint8_t  ui8Pot, ui8PotAtual;
 
 //****************************************************************************
@@ -71,10 +71,9 @@ static void vTaskGerador(void *pvParameters)
           break;
 
         case '*':
-          if(strcmp(vcFreq, "0")!=0){
-            _vcTecla[0]=',';
-            if(strlen(vcFreq)<sizeof(vcFreq)-2)
-              strcat(vcFreq, _vcTecla);
+          _vcTecla[0]=',';
+          if((strlen(vcFreq)<sizeof(vcFreq)-2) && (strstr(vcFreq,_vcTecla)==NULL)){
+            strcat(vcFreq, _vcTecla);
             vMostraFreq();
           }
           break;
