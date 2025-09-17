@@ -15,17 +15,20 @@
   #include <stdio.h>
   #include <string.h>
   #include <unistd.h>
-  #include <stdarg.h> 
+  #include <stdarg.h>   
   #include "freertos/FreeRTOS.h"
   #include "freertos/task.h"
   #include "freertos/semphr.h" 
   #include "freertos/queue.h" 
+  #include "esp_task_wdt.h"
   #include "driver/gpio.h"
-  #include "esp_log.h"
-  #include "sdkconfig.h"
-  #include "esp_rom_sys.h"
   #include "driver/spi_master.h"
-
+  #include "esp_log.h"
+  #include "esp_rom_sys.h"
+  #include "sdkconfig.h"
+  #include "u8g2.h"
+  #include <math.h> 
+  
   //---------------------------------------------------------------------------------
 
   typedef uint8_t uchar;
@@ -46,7 +49,7 @@
 
   //---------------------------------------------------------------------------------
 
-  var int xxx;
+  var int32_t xxx;
   
   //---------------------------------------------------------------------------------
 

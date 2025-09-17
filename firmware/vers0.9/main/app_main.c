@@ -21,7 +21,7 @@ void app_main(void)
   vInicioDriverDisplay();
   vInicioDriverDds();
 
-  // vInicioBibliotecaDisplay();
+  vInicioBibliotecaDisplay();
   
   vInicioAppHardware();
   vInicioAppDisplay();

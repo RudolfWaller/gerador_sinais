@@ -93,6 +93,7 @@ static void vTaskTeclado(void *pvParameters)
 
       case eESP_TECLAR:
         _ui8TecAux=ui8LeColunas();
+        xxx=_ui8TecAux;
         if(_ui8TecAux!=NO_TEC)
           eTecSel=ePREP_LE_TECLAS;
         break;
@@ -118,6 +119,7 @@ static void vTaskTeclado(void *pvParameters)
                 if(++_ui8QtdeLida>=1){
                   do{
                   }while(xQueueSend(sTeclas, &_ui8Tecla, pdMS_TO_TICKS(100)) != pdPASS);
+                  vTaskResume(tTaskLed);
 
                   eTecSel=eESP_LIB_TECLA;
                 }

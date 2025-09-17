@@ -12,12 +12,12 @@ typedef struct {
 
 //****************************************************************************
 
-static const char *TAG = "app_DSP";
+static const char *TAG = "app_DISP";
 SemaphoreHandle_t sSemDisplay;
 
 //****************************************************************************
 
-void vRecuperaInfoDisplay(void)
+void vPosRecuperaInfoDisplay(int16_t _i16Col, int16_t _i16Lin)
 {
   TaskHandle_t xTaskHandle = xTaskGetCurrentTaskHandle();
   Display_t *pxState = (Display_t *)pvTaskGetThreadLocalStoragePointer(xTaskHandle, 0);
@@ -29,8 +29,20 @@ void vRecuperaInfoDisplay(void)
     vTaskSetThreadLocalStoragePointer(xTaskHandle, 0, pxState);
   }
 
-  if (xSemaphoreTake(sSemDisplay, portMAX_DELAY) == pdTRUE) 
-    __vGotoXY(pxState->ui8Coluna, pxState->ui8linha);
+  if (xSemaphoreTake(sSemDisplay, portMAX_DELAY) == pdTRUE)
+  {
+    if(_i16Col<0)
+      _i16Col=pxState->ui8Coluna;
+    if(_i16Lin<0)
+      _i16Lin=pxState->ui8linha;
+
+    __vGotoXY(_i16Col, _i16Lin);
+  }
+}
+
+void vRecuperaInfoDisplay(void)
+{
+  vPosRecuperaInfoDisplay(-1, -1);
 }
 
 //****************************************************************************
@@ -48,7 +60,7 @@ void vSalvaInfoDisplay(void)
 
 void vLimpaDisplay()
 {
-  vRecuperaInfoDisplay();
+  vPosRecuperaInfoDisplay(0, 0);
   __vLimpaDisplay();
   vSalvaInfoDisplay();
 }
@@ -59,6 +71,9 @@ void vDadoDisplay(uchar _ucDado)
 {
   vRecuperaInfoDisplay();
   __vDadoDisplay(_ucDado);
+
+  if(eModoDisplay==eGRAPH)
+    vDspAtualizaDisplay();
   vSalvaInfoDisplay();
 }
 
@@ -66,8 +81,7 @@ void vDadoDisplay(uchar _ucDado)
 
 void vGotoXY(uint8_t _ui8Col, uint8_t _ui8Lin)
 {
-  vRecuperaInfoDisplay();  
-  __vGotoXY(_ui8Col, _ui8Lin);
+  vPosRecuperaInfoDisplay(_ui8Col, _ui8Lin);
   vSalvaInfoDisplay();
 }
 
@@ -77,6 +91,9 @@ void vStringDisplay(char *_pcString)
 {
   vRecuperaInfoDisplay();
   __vStringDisplay(_pcString);
+  
+  if(eModoDisplay==eGRAPH)
+    vDspAtualizaDisplay();
   vSalvaInfoDisplay();
 }
 
@@ -118,8 +135,7 @@ void vPosPrintf(uint8_t _ui8Col, uint8_t _ui8Lin, const char *fmt, ...)
   // Finaliza a lista de argumentos.
   va_end(args);
   
-  vRecuperaInfoDisplay();    
-  __vGotoXY(_ui8Col, _ui8Lin);
+  vPosRecuperaInfoDisplay(_ui8Col, _ui8Lin);
 
   // Envia a string formatada para a função do driver.
   __vStringDisplay(buffer);

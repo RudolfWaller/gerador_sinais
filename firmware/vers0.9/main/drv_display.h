@@ -14,10 +14,17 @@
     eTEXT=0xA5
   } tModoDisplay;
 
+  #ifdef MAIN
+    tModoDisplay eModoDisplay=eINIT;
+  #else
+    var tModoDisplay eModoDisplay;
+  #endif
+
   //****************************************************************
   // Rotinas
 
   void vInicioDriverDisplay(void);
+  void __vEscreveDisplay(uchar _ucByte, bool _bControle);
   void __vComandoDisplay(uchar _ucCom);
   void __vDadoDisplay(uchar _ucDado);
   void __vLimpaDisplay(void);

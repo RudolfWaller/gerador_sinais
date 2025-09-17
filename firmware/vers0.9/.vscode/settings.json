@@ -20,6 +20,7 @@
         "_default_types.h": "c",
         "MASL.C": "cpp",
         "cstdint": "c",
-        "format": "c"
+        "format": "c",
+        "*.inc": "c"
     }
 }
